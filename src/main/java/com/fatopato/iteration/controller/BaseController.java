@@ -2,6 +2,7 @@ package com.fatopato.iteration.controller;
 
 import com.fatopato.iteration.dto.BaseDto;
 import com.fatopato.iteration.dto.OrganizationDto;
+import com.fatopato.iteration.exception.BaseBadRequestException;
 import com.fatopato.iteration.exception.BaseEntityNotFoundException;
 import com.fatopato.iteration.exception.EntityAlreadyExistsException;
 import com.fatopato.iteration.service.BaseServiceInterface;
@@ -50,6 +51,10 @@ public class BaseController <D extends BaseDto>{
     }
     @ExceptionHandler(BaseEntityNotFoundException.class)
     public ResponseEntity<String> handleBaseEntityNotFoundException(BaseEntityNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+    @ExceptionHandler(BaseBadRequestException.class)
+    public ResponseEntity<String> handleBaseBadRequestException(BaseBadRequestException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 }

@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IterationItemRepository extends JpaRepository<IterationItem, Long> {
+    boolean existsByIterationIdAndTitle(long iterationId, String title);
 }

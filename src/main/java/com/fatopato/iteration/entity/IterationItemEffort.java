@@ -25,4 +25,8 @@ public class IterationItemEffort {
 
     @Column(name = "effort")
     private float effort;
+
+    public IterationItemEffort(Long id) {
+        this.id = id;
+    }
 }

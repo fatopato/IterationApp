@@ -5,12 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "team_member")
-public class TeamMember {
+public class TeamMember extends BaseEntity{
 
     public TeamMember(Long id) {
         this.id = id;
@@ -33,4 +36,7 @@ public class TeamMember {
     @ManyToOne
     @JoinColumn(name = "external_squad_id")
     private ExternalSquad externalSquad;
+
+    @OneToMany(mappedBy = "teamMember")
+    private List<IterationItemEffort> efforts = new ArrayList<>();
 }

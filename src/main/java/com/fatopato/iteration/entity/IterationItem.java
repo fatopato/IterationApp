@@ -14,7 +14,12 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "iteration_item")
-public class IterationItem {
+public class IterationItem extends BaseEntity{
+
+    public IterationItem(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "iteration")
-public class Iteration {
+public class Iteration extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,4 +36,8 @@ public class Iteration {
 
     @OneToMany(mappedBy = "iteration")
     private List<IterationItem> iterationItems = new ArrayList<>();
+
+    public Iteration(Long id) {
+        this.id = id;
+    }
 }

@@ -14,6 +14,10 @@ import java.util.List;
 @Entity
 @Table(name = "external_squad")
 public class ExternalSquad extends BaseEntity{
+    public ExternalSquad(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

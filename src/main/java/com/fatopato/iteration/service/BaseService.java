@@ -2,6 +2,7 @@ package com.fatopato.iteration.service;
 
 import com.fatopato.iteration.dto.BaseDto;
 import com.fatopato.iteration.entity.BaseEntity;
+import com.fatopato.iteration.exception.BaseBadRequestException;
 import com.fatopato.iteration.exception.BaseEntityNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -19,6 +20,7 @@ public abstract class BaseService <D extends BaseDto, E extends BaseEntity> {
     }
     
     public D save (D dto) {
+        if (dto.getId() != null) throw new BaseBadRequestException("Id must be null at save");
         validate(dto, false);
         return toDto(repository.save(toEntity(dto)));
     }
