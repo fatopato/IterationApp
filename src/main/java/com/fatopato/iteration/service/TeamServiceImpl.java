@@ -4,6 +4,7 @@ import com.fatopato.iteration.dto.TeamDto;
 import com.fatopato.iteration.entity.Organization;
 import com.fatopato.iteration.entity.Team;
 import com.fatopato.iteration.entity.TeamMember;
+import com.fatopato.iteration.exception.BaseEntityNotFoundException;
 import com.fatopato.iteration.exception.EntityAlreadyExistsException;
 import com.fatopato.iteration.exception.OrganizationNotFoundException;
 import com.fatopato.iteration.exception.TeamNotFoundException;
@@ -66,7 +67,7 @@ public class TeamServiceImpl extends BaseService<TeamDto, Team> implements TeamS
 
         if (dto.getParentId() != null) {
             boolean parentExists = repository.existsById(dto.getParentId());
-            if (!parentExists) throw new TeamNotFoundException(dto.getParentId());
+            if (!parentExists) throw new BaseEntityNotFoundException("Invalid parent team id: " + dto.getParentId());
         }
         boolean existsByName = repository.existsByName(dto.getName());
         if (existsByName) throw new EntityAlreadyExistsException("Team already exists with name: " + dto.getName());

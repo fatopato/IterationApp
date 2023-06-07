@@ -11,6 +11,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "team_member")
 public class TeamMember {
+
+    public TeamMember(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
