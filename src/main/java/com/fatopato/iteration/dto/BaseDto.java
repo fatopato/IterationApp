@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IterationItemEffortDto extends BaseDto{
-    private Long iterationItemId;
-    private Long teamMemberId;
-    private Float effort;
+public abstract class BaseDto {
+    private Long id;
 }

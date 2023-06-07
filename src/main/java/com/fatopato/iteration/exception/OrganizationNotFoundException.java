@@ -1,10 +1,8 @@
 package com.fatopato.iteration.exception;
 
-public class OrganizationNotFoundException extends RuntimeException{
-    public OrganizationNotFoundException(String message) {
-        super(message);
-    }
+public class OrganizationNotFoundException extends BaseEntityNotFoundException{
+
     public OrganizationNotFoundException(Long id) {
-        super("Organization not found with id: " + id);
+        super("Organization", id);
     }
 }

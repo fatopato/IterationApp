@@ -19,5 +19,5 @@ public interface TeamService {
 
     void validate(TeamDto dto, boolean isUpdate);
 
-    Boolean isExist(Long id);
+    Boolean isExists(Long id);
 }

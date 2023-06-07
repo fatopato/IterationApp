@@ -11,11 +11,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IterationDto {
-    private Long id;
+public class IterationDto extends BaseDto{
     private Long teamId;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Boolean isActive;
+    private Boolean isActive = Boolean.FALSE;
     private List<Long> iterationItemIds = new ArrayList<>();;
 }

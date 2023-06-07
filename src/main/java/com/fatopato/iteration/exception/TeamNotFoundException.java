@@ -1,11 +1,8 @@
 package com.fatopato.iteration.exception;
 
-public class TeamNotFoundException extends RuntimeException{
-    public TeamNotFoundException(String message) {
-        super(message);
-    }
+public class TeamNotFoundException extends BaseEntityNotFoundException{
     public TeamNotFoundException(Long id) {
-        super("Team not found with id: " + id);
+        super("Team", id);
     }
 
 }

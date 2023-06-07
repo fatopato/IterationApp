@@ -4,45 +4,22 @@ import com.fatopato.iteration.dto.OrganizationDto;
 import com.fatopato.iteration.entity.Organization;
 import com.fatopato.iteration.entity.Team;
 import com.fatopato.iteration.exception.EntityAlreadyExistsException;
-import com.fatopato.iteration.exception.OrganizationNotFoundException;
-import com.fatopato.iteration.exception.TeamNotFoundException;
 import com.fatopato.iteration.repository.OrganizationRepository;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
-public class OrganizationServiceImpl implements OrganizationService {
+public class OrganizationServiceImpl extends BaseService<OrganizationDto, Organization> implements OrganizationService {
 
     @NonNull
     private final OrganizationRepository repository;
 
-    @Override
-    public OrganizationDto save(OrganizationDto dto) {
-        validate(dto, false);
-        return toDto(repository.save(toEntity(dto)));
-    }
+    protected OrganizationServiceImpl(OrganizationRepository repository) {
+        super(repository, "Organization");
+        this.repository = repository;
 
-    @Override
-    public OrganizationDto getById(Long id) {
-        return repository.findById(id).map(this::toDto).orElseThrow(() -> new OrganizationNotFoundException("Organization not found with the id: " + id));
-    }
-
-    @Override
-    public OrganizationDto update(OrganizationDto dto) {
-        repository.findById(dto.getId()).orElseThrow(() -> new OrganizationNotFoundException("Organization not found with the id: " + dto.getId()));
-        return toDto(repository.save(toEntity(dto)));
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        repository.findById(id)
-                .orElseThrow(() -> new OrganizationNotFoundException("Organization not found with the id: " + id));
-        repository.deleteById(id);
     }
 
     @Override
@@ -64,20 +41,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public List<OrganizationDto> getAll() {
-        return repository.findAll().stream().map(this::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public Boolean isExists(Long id) {
-        return repository.existsById(id);
-    }
-
-    @Override
     public void validate(OrganizationDto dto, boolean isUpdate) {
         boolean existsByName = repository.existsByName(dto.getName());
         if (existsByName) throw new EntityAlreadyExistsException("Organization already exists with name: " + dto.getName());
     }
-
 
 }

@@ -10,8 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExternalSquadDto {
-    private Long id;
+public class ExternalSquadDto extends BaseDto{
     private String name;
     private List<Long> squadMemberIds = new ArrayList<>();;
 }
